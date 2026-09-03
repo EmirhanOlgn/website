@@ -6,7 +6,7 @@
 
 **Personal site. Statically exported Next.js, deployed to GitHub Pages.**
 
-[**emirhan.lol**](https://emirhan.lol)
+[**emir.ws**](https://emir.ws)
 
 [![Deploy](https://github.com/EmirhanOlgn/website/actions/workflows/deploy.yml/badge.svg)](https://github.com/EmirhanOlgn/website/actions/workflows/deploy.yml)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs&logoColor=white)

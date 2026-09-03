@@ -10,7 +10,7 @@ export const site = {
   ],
   tagline:
     "I build clean interfaces on the frontend, and lightweight, battle-tested servers on the backend.",
-  url: "https://emirhan.lol",
+  url: "https://emir.ws",
   email: "emirhanolgn@proton.me",
   location: "Türkiye",
   socials: {
