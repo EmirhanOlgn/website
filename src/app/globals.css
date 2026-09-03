@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant light (&:is(.light *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-violet: var(--violet);
+  --color-violet-dim: var(--violet-dim);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+}
+
+/* Dark is the base; the light theme below is the override. */
+:root {
+  --radius: 0.75rem;
+
+  /* Near-black with a cool cast. Pure #000 reads as a hole on OLED. */
+  --background: oklch(0.09 0.006 285);
+  --foreground: oklch(0.97 0.002 285);
+
+  /* Cards sit 0.035 above the page. Elevation is the gap, not the border. */
+  --card: oklch(0.125 0.008 285);
+  --card-foreground: oklch(0.97 0.002 285);
+
+  --muted: oklch(0.17 0.008 285);
+  --muted-foreground: oklch(0.66 0.012 285);
+
+  --accent: oklch(0.19 0.012 288);
+  --accent-foreground: oklch(0.97 0.002 285);
+
+  /* Chroma stays under 0.2: a saturated purple vibrates on a dark surface. */
+  --violet: oklch(0.62 0.185 295);
+  --violet-dim: oklch(0.48 0.14 295);
+
+  --primary: var(--violet);
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Borders are a hint, not a line. */
+  --border: oklch(0.22 0.01 287);
+  --ring: oklch(0.62 0.185 295 / 55%);
+}
+
+.light {
+  --background: oklch(0.99 0.002 285);
+  --foreground: oklch(0.16 0.01 285);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.01 285);
+  --muted: oklch(0.96 0.004 285);
+  --muted-foreground: oklch(0.48 0.012 285);
+  --accent: oklch(0.955 0.008 290);
+  --accent-foreground: oklch(0.16 0.01 285);
+  --violet: oklch(0.52 0.19 295);
+  --violet-dim: oklch(0.62 0.15 295);
+  --primary: var(--violet);
+  --primary-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.006 287);
+  --ring: oklch(0.52 0.19 295 / 45%);
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    /* Two low-alpha radials rather than one bright blob. */
+    background-image:
+      radial-gradient(60rem 40rem at 12% -8%, oklch(0.62 0.185 295 / 7%), transparent 62%),
+      radial-gradient(48rem 34rem at 92% 4%, oklch(0.62 0.185 295 / 4%), transparent 58%);
+    background-attachment: fixed;
+  }
+
+  /* Scrollbar. Firefox takes the two standard properties and ignores the
+     WebKit block below. */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: oklch(0.32 0.015 288);
+    border-radius: 9999px;
+    /* Border plus background-clip inset the thumb into a floating pill. */
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--violet-dim);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: var(--violet);
+  }
+
+  /* Unstyled, this renders as a pale square in the page corner. */
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::selection {
+    background: oklch(0.62 0.185 295 / 28%);
+  }
+
+  /* Motion is decoration here, so the OS setting wins outright. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Violet text gradient, for the one or two headings that need it. */
+@utility text-gradient-violet {
+  background-image: linear-gradient(
+    100deg,
+    var(--foreground) 0%,
+    var(--foreground) 42%,
+    var(--violet) 78%
+  );
+  background-clip: text;
+  color: transparent;
+}
