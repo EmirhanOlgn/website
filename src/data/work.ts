@@ -40,6 +40,7 @@ export const work: WorkItem[] = [
     role: "Full-stack Development & UI/UX Design",
     year: "2026",
     tags: ["TypeScript", "Tailwind", "PostgreSQL"],
+    site: "https://internationalcda.com",
   },
   {
     slug: "haxballtr",
